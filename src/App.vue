@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="'phase__' + phase">
     <h1>Turtlemodoro</h1>
     <Stream />
     <Timer
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Stream from "./components/Stream";
 import Timer from "./components/Timer";
+import Stream from "./components/Stream";
 import Configuration from "./components/Configuration";
 
 export default {
@@ -47,7 +47,7 @@ export default {
       this.timer = this.configuration.pomodoro * 60;
       this.intervals = 0;
 
-      this._interval = window.setInterval(this.tick, 1000);
+      this._interval = window.setInterval(this.tick, 10);
     },
     stop: function () {
       this.running = false;
@@ -72,6 +72,10 @@ export default {
             this.timer = this.configuration.shortBreak * 60;
             this.phase = "shortBreak";
           }
+        }
+        else {
+          this.phase = "pomodoro";
+          this.timer = this.configuration.pomodoro * 60;
         }
       }
     },

@@ -9,8 +9,6 @@ export default {
     }),
     methods: {
         synchronizeImage: function () {
-            console.log("Synchronizing stream image");
-
             // This is just a nasty trick to prevent self assign errors
             this.streamUrl = this.streamUrl.replace("", "");
         }
