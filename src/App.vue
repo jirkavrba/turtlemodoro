@@ -47,7 +47,7 @@ export default {
       this.timer = this.configuration.pomodoro * 60;
       this.intervals = 0;
 
-      this._interval = window.setInterval(this.tick, 10);
+      this._interval = window.setInterval(this.tick, 1000);
     },
     stop: function () {
       this.running = false;
