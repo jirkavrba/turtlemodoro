@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Configuration</h1>
+    <div class="configuration">
+        <h1 class="timer__phase">Configuration</h1>
 
         <label>Pomodoro time: <b>{{ configuration.pomodoro.toString().padStart(2, '0') }}:00</b></label><br>
         <input type="range" v-model="configuration.pomodoro" min="1" max="60" step="1">

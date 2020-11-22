@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="'phase__' + phase">
     <h1>Turtlemodoro</h1>
-    <Stream />
+    <Stream :phase="this.phase"/>
     <Timer
       v-if="this.running"
       :timer="this.timer"
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import "./assets/style.css";
+
 import Timer from "./components/Timer";
 import Stream from "./components/Stream";
 import Configuration from "./components/Configuration";

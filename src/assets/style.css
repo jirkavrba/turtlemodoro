@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    width: 100vw;
+    min-height: 100vh;
+    background: #222222;
+    transition: 0.3s background;
+}
+
+#app.phase__pomodoro {
+    background: #552222;
+}
+
+#app.phase__shortBreak{
+    background: #225522;
+}
+
+#app.phase__longBreak{
+    background: #222255;
+}
+
+#app > h1 {
+    text-align: center;
+    font-size: 4rem;
+    padding: 1rem 0;
+    color: #ffffff;
+}
+
+.stream {
+    display: block;
+    margin: 1rem auto;
+    border-radius: 30px;
+    width: 640px;
+    height: 480px;
+    transition: 0.3s all;
+}
+
+.stream.stream--minified {
+    width: 320px;
+    height: 240px;
+}
+
+.timer {
+    margin: 1rem auto;
+    display: block;
+    text-align: center;
+}
+
+.timer__phase {
+    font-size: 2rem;
+    color: #ffffff;
+    opacity: 0.5; 
+    text-transform: uppercase;
+}
+
+.timer__clock { 
+    display: block;
+    margin: 0 auto;
+    font-size: 6rem;
+    color: #ffffff;
+}

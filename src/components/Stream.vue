@@ -1,9 +1,10 @@
 <template>
-    <img :src="streamUrl" width="100" height="100">
+    <img :src="streamUrl" width="640" height="480" :class="'stream ' + (this.phase == 'pomodoro' ? 'stream--minified' : '')">
 </template>
 <script>
 export default {
     name: "Stream",
+    props: ["phase"],
     data: () => ({
         streamUrl: ""
     }),
