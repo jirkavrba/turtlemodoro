@@ -21,9 +21,11 @@
 
 <script>
 import "./assets/style.css";
-import airhorn from "./assets/airhorn.mp3";
+import pomodoro from "./assets/sounds/pomodoro.mp3";
+import airhorn from "./assets/sounds/airhorn.mp3";
+import rickroll from "./assets/sounds/rickroll.mp3";
 
-import {Howl, Howler} from 'howler'; // eslint-disable-line no-unused-vars
+import { Howl, Howler } from "howler"; // eslint-disable-line no-unused-vars
 import Timer from "./components/Timer";
 import Stream from "./components/Stream";
 import Configuration from "./components/Configuration";
@@ -45,10 +47,14 @@ export default {
     },
 
     _interval: null,
-    _sound: null,
+    _sounds: {},
   }),
   created: function () {
-    this._sound = new Howl({ src: [airhorn]})
+    this._sounds = {
+      pomodoro: new Howl({ src: [pomodoro] }),
+      shortBreak: new Howl({ src: [airhorn] }),
+      longBreak: new Howl({ src: [rickroll] })
+    };
   },
   methods: {
     start: function () {
@@ -63,6 +69,7 @@ export default {
     stop: function () {
       this.running = false;
       this.phase = "stop";
+      this.timer = 0;
 
       window.clearInterval(this._interval);
       this.changeIcon();
@@ -70,8 +77,8 @@ export default {
 
     tick: function () {
       this.timer--;
-      
-      document.title = this.formatTime(this.timer) + " | Turtlemodoro" 
+
+      document.title = this.formatTime(this.timer) + " | Turtlemodoro";
 
       // TODO: Refactor this shit
       if (this.timer == 0) {
@@ -90,7 +97,7 @@ export default {
           this.phase = "pomodoro";
           this.timer = this.configuration.pomodoro * 60;
         }
-        
+
         this.playPhaseChangeSound();
         this.changeIcon();
       }
@@ -107,14 +114,14 @@ export default {
       );
     },
     playPhaseChangeSound() {
-      this._sound.play();
+      this._sounds[this.phase].play();
     },
     changeIcon() {
-      const icon = "icon" + (this.running ? ("-" + this.phase) : "") + ".png";
+      const icon = "icon" + (this.running ? "-" + this.phase : "") + ".png";
 
-      const favicon = document.getElementById("favicon");      
+      const favicon = document.getElementById("favicon");
       favicon.href = icon;
-    }
+    },
   },
   components: {
     Stream,
