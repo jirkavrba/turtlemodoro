@@ -58,12 +58,14 @@ export default {
       this.intervals = 0;
 
       this._interval = window.setInterval(this.tick, 1000);
+      this.changeIcon();
     },
     stop: function () {
       this.running = false;
       this.phase = "stop";
 
       window.clearInterval(this._interval);
+      this.changeIcon();
     },
 
     tick: function () {
@@ -90,6 +92,7 @@ export default {
         }
         
         this.playPhaseChangeSound();
+        this.changeIcon();
       }
     },
     formatTime: function (time) {
@@ -105,6 +108,12 @@ export default {
     },
     playPhaseChangeSound() {
       this._sound.play();
+    },
+    changeIcon() {
+      const icon = "icon" + (this.running ? ("-" + this.phase) : "") + ".png";
+
+      const favicon = document.getElementById("favicon");      
+      favicon.href = icon;
     }
   },
   components: {
