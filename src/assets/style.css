@@ -67,6 +67,28 @@
     font-family: 'Roboto Mono', monospace;
 }
 
+.timer__intervals {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.interval {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: 0.3s all;
+}
+
+.interval.active {
+    border: 5px solid white;
+}
+
 .configuration {
     display: block;
     margin: 1rem auto;
@@ -83,4 +105,5 @@
 
 .configuration__slider label b {
     color: #ffffff;
+    font-family: 'Roboto Mono', monospace;
 }

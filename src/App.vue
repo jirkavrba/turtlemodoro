@@ -7,6 +7,7 @@
       :timer="this.timer"
       :phase="this.phase"
       :format="this.formatTime"
+      :configuration="this.configuration"
       :intervals="this.intervals"
       :stop="this.stop"
     />
