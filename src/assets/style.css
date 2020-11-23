@@ -24,14 +24,14 @@
 
 #app > h1 {
     text-align: center;
-    font-size: 4rem;
+    font-size: 2rem;
     padding: 1rem 0;
     color: #ffffff;
 }
 
 .stream {
     display: block;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
     border-radius: 30px;
     width: 640px;
     height: 480px;
@@ -60,5 +60,23 @@
     display: block;
     margin: 0 auto;
     font-size: 6rem;
+    color: #ffffff;
+}
+
+.configuration {
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+}
+.configuration__slider {
+    display: block;
+    margin: 0.5rem;
+}
+
+.configuration__slider label {
+    color: #aaaaaa;
+}
+
+.configuration__slider label b {
     color: #ffffff;
 }
