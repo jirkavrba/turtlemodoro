@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Mono:wght@700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +10,7 @@
     min-height: 100vh;
     background: #222222;
     transition: 0.3s background;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #app.phase__pomodoro {
@@ -61,6 +64,7 @@
     margin: 0 auto;
     font-size: 6rem;
     color: #ffffff;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .configuration {

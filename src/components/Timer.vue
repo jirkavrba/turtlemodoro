@@ -11,7 +11,7 @@ export default {
   props: ["timer", "stop", "format", "phase", "intervals"],
   methods: {
     _formatPhase: function (phase) {
-        return phase.toUpperCase();
+        return phase.replace(/([A-Z])/g, ' $1').trim().toUpperCase();
     },
   },
 };
