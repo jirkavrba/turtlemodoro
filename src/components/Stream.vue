@@ -18,7 +18,9 @@ export default {
     methods: {
         synchronizeImage: function () {
             // This is just a nasty trick to prevent self assign errors
-            this.streamUrl = this.streamUrl.replace("", "");
+            const random = Math.random().toString(32);
+
+            this.streamUrl = this.streamUrl.replace(/\?(.*)$/, "?_=" + random);
         },
     },
     computed: {
@@ -33,10 +35,10 @@ export default {
     mounted: async function () {
         this.streamUrl = await fetch("https://zelva.vrba.dev/api.php")
                                 .then(response => response.json())
-                                .then(response => response.stream_url);
+                                .then(response => response.stream_url + "?_");
 
-        // Sync the image every 10 seconds as it slowly falls behind sometimes
-        setInterval(this.synchronizeImage, 10 * 1000);
+        // Sync the image every 30 seconds as it slowly falls behind sometimes
+        setInterval(this.synchronizeImage, 30 * 1000);
     }
 }
 </script>

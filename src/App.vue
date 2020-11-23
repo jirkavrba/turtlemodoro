@@ -11,6 +11,16 @@
       :intervals="this.intervals"
       :stop="this.stop"
     />
+    <div class="configuration" v-if="this.running">
+      <div class="configuration__slider">
+        <label
+          >Volume <b>{{ this.volume }}</b
+          >%</label
+        >
+        <br />
+        <input type="range" v-model="volume" min="0" max="100" step="1" />
+      </div>
+    </div>
     <Configuration
       v-else
       :configuration="this.configuration"
@@ -22,10 +32,9 @@
 <script>
 import "./assets/style.css";
 import pomodoro from "./assets/sounds/pomodoro.mp3";
-import airhorn from "./assets/sounds/airhorn.mp3";
 import rickroll from "./assets/sounds/rickroll.mp3";
 
-import { Howl, Howler } from "howler"; // eslint-disable-line no-unused-vars
+import { Howl, Howler } from "howler";
 import Timer from "./components/Timer";
 import Stream from "./components/Stream";
 import Configuration from "./components/Configuration";
@@ -45,6 +54,7 @@ export default {
       // How many intervals between long breaks
       longBreakIntervals: 4,
     },
+    volume: 100,
 
     _interval: null,
     _sounds: {},
@@ -52,8 +62,8 @@ export default {
   created: function () {
     this._sounds = {
       pomodoro: new Howl({ src: [pomodoro] }),
-      shortBreak: new Howl({ src: [airhorn] }),
-      longBreak: new Howl({ src: [rickroll] })
+      shortBreak: new Howl({ src: [pomodoro] }),
+      longBreak: new Howl({ src: [rickroll] }),
     };
   },
   methods: {
@@ -114,6 +124,7 @@ export default {
       );
     },
     playPhaseChangeSound() {
+      Howler.volume(this.volume / 100);
       this._sounds[this.phase].play();
     },
     changeIcon() {

@@ -117,3 +117,25 @@
     color: #ffffff;
     font-family: 'Roboto Mono', monospace;
 }
+
+@media(max-height: 700px) {
+    #app > h1 {
+        font-size: 1rem;
+        padding: 0.3rem;
+    }
+
+    img.stream {
+        width: 160px !important;
+        height: 120px !important;
+    }
+
+    .interval {
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin: 0 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transition: 0.3s all;
+    }
+}
