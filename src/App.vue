@@ -21,7 +21,9 @@
 
 <script>
 import "./assets/style.css";
+import airhorn from "./assets/airhorn.mp3";
 
+import {Howl, Howler} from 'howler'; // eslint-disable-line no-unused-vars
 import Timer from "./components/Timer";
 import Stream from "./components/Stream";
 import Configuration from "./components/Configuration";
@@ -43,7 +45,11 @@ export default {
     },
 
     _interval: null,
+    _sound: null,
   }),
+  created: function () {
+    this._sound = new Howl({ src: [airhorn]})
+  },
   methods: {
     start: function () {
       this.running = true;
@@ -82,6 +88,8 @@ export default {
           this.phase = "pomodoro";
           this.timer = this.configuration.pomodoro * 60;
         }
+        
+        this.playPhaseChangeSound();
       }
     },
     formatTime: function (time) {
@@ -95,6 +103,9 @@ export default {
           .padStart(2, 0)
       );
     },
+    playPhaseChangeSound() {
+      this._sound.play();
+    }
   },
   components: {
     Stream,
