@@ -25,7 +25,7 @@
     background: #222255;
 }
 
-#app > h1 {
+#app > .content > h1 {
     text-align: center;
     font-size: 2rem;
     padding: 1rem 0;
@@ -116,6 +116,34 @@
 .configuration__slider label b {
     color: #ffffff;
     font-family: 'Roboto Mono', monospace;
+}
+
+.paused {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.paused h1 {
+    font-size: 5rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.content {
+    transition: 0.3s filter;
+}
+
+.content--paused {
+    filter: blur(10px);
 }
 
 @media(max-height: 700px) {

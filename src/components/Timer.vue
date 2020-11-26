@@ -6,13 +6,14 @@
         <div :class="'interval ' + _intervalClass(i)" v-for="(_, i) in new Array(this.configuration.longBreakIntervals)" :key="i">
         </div>
     </div>
-    <button @click="this.stop">STOP</button>
+    <button @click="this.pause">Pause</button>
+    <button @click="this.stop">Stop</button>
   </div>
 </template>
 <script>
 export default {
   name: "Timer",
-  props: ["timer", "stop", "format", "phase", "intervals", "configuration"],
+  props: ["timer", "stop", "pause", "format", "phase", "intervals", "configuration"],
   methods: {
     _formatPhase: function (phase) {
         return phase.replace(/([A-Z])/g, ' $1').trim().toUpperCase();

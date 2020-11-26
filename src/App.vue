@@ -1,31 +1,38 @@
 <template>
   <div id="app" :class="'phase__' + phase">
-    <h1>Turtlemodoro</h1>
-    <Stream :phase="this.phase" />
-    <Timer
-      v-if="this.running"
-      :timer="this.timer"
-      :phase="this.phase"
-      :format="this.formatTime"
-      :configuration="this.configuration"
-      :intervals="this.intervals"
-      :stop="this.stop"
-    />
-    <div class="configuration" v-if="this.running">
-      <div class="configuration__slider">
-        <label
-          >Volume <b>{{ this.volume }}</b
-          >%</label
-        >
-        <br />
-        <input type="range" v-model="volume" min="0" max="100" step="1" />
+    <div :class="'content' + (this.paused ? ' content--paused' : '')">
+      <h1>Turtlemodoro</h1>
+      <Stream :phase="this.phase" />
+      <Timer
+        v-if="this.running"
+        :timer="this.timer"
+        :phase="this.phase"
+        :format="this.formatTime"
+        :configuration="this.configuration"
+        :intervals="this.intervals"
+        :pause="this.pause"
+        :stop="this.stop"
+      />
+      <div class="configuration" v-if="this.running">
+        <div class="configuration__slider">
+          <label
+            >Volume <b>{{ this.volume }}</b
+            >%</label
+          >
+          <br />
+          <input type="range" v-model="volume" min="0" max="100" step="1" />
+        </div>
       </div>
+      <Configuration
+        v-else
+        :configuration="this.configuration"
+        :start="this.start"
+      />
     </div>
-    <Configuration
-      v-else
-      :configuration="this.configuration"
-      :start="this.start"
-    />
+    <div class="paused" v-if="this.paused">
+      <h1>Paused</h1>
+      <button @click="this.pause">Resume</button>
+    </div>
   </div>
 </template>
 
@@ -43,6 +50,7 @@ export default {
   name: "App",
   data: () => ({
     running: false,
+    paused: false,
     timer: 0,
     phase: "none",
     intervals: 0, // How many short breaks was there since last long break
@@ -76,6 +84,9 @@ export default {
       this._interval = window.setInterval(this.tick, 1000);
       this.changeIcon();
     },
+    pause: function () {
+      this.paused = !this.paused;
+    },
     stop: function () {
       this.running = false;
       this.phase = "stop";
@@ -86,6 +97,8 @@ export default {
     },
 
     tick: function () {
+      if (this.paused) return;
+
       this.timer--;
 
       document.title = this.formatTime(this.timer) + " | Turtlemodoro";
